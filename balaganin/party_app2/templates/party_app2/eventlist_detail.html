@@ -1,0 +1,32 @@
+{% extends 'profile_app/base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+{% block content %}
+<div class="jumbotron" style="background-image: url({% static 'images/background-event.jpg' %}); background-position:center; background-size:cover;"">
+    <div class="container" style="width:500px; height:500px;">
+        <form method="GET" style="color:white;">
+        {{ filter.form|crispy }}
+            <button type="submit" class="btn btn-danger">Filter</button>
+        </form>
+    </div>
+        <br>
+            <div class="d-flex justify-content-center">
+            <ul class="eventList">
+                {% for event in filter.qs %}
+                <li class="eventItem">
+                    <a href="{{ event.link }}"> {{ event.title}} </a>
+                </li>
+                {% endfor %}
+            </ul>
+            </div>
+
+</div>
+<br>
+<br>
+<br>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'profile_app/base.html' %}
+
+{% block title %} <h1><strong>Login Here</strong></h1>{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+<form method="post" class="form-group">
+    {% csrf_token %}
+        <div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+        {{ form.username|as_crispy_field }}
+      </div>
+        </div>
+    <div class="form-row">
+      <div class="form-group col-md-4 mb-0">
+        {{ form.password|as_crispy_field }}
+      </div>
+    </div>
+    <p>Don't have an account, create one! <a href="/profile/register">Here</a> </p>
+    <button type="submit" class="btn btn-danger btn-lg" >BALAGAN!</button>
+</div>
+
+
+</form>
+{% endblock %}

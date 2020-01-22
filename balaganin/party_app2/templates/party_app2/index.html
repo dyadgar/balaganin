@@ -1,0 +1,105 @@
+{% extends 'profile_app/base.html' %}
+
+
+
+<h1>Create an Event</h1>
+{% load static %}
+{% block content %}
+<body style="background-image: url({% static 'images/background2.jpg' %}) !important; background-position:center; background-size:cover;">
+   <link rel="stylesheet" type="text/css" href="{% static 'css/style1.css' %}">
+<div django-app="eventManager">
+    <div class="container" id="container1">
+            <div class="content">
+            <h1 id="h1">Party Creator</h1>
+            <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <div class="inputContainer">
+                    <input type="text" id="description" class="eventName" placeholder="Name of Your Event" name="description" required>
+                    <label for="description">Event Name</label>
+                </div>
+
+                <div class="inputContainer half last">
+                    <i class="fa fa-caret-down selectArrow"></i>
+                    <select id="category" class="eventCategory" name="category_select">
+                    <option class="disabled" value="">Choose a type</option>
+                    {% for category in categories %}
+                        <option class="" value="{{ category.name }}" name="{{ category.name }}">{{ category.name }}</option>
+                    {% endfor %}
+                    </select>
+                    <label for="category">Party Type</label>
+                </div>
+
+                <div class="inputContainer half last right">
+                    <input type="date" id="dueDate" class="eventDate" name="date">
+                    <label for="dueDate">Event Date</label>
+                </div>
+
+
+                <div class="inputContainer half last right">
+                    <input type="text" id="venue" class="eventDate" name="venue">
+                    <label for="venue">Venue</label>
+                </div>
+
+                <div class="inputContainer half last">
+                    <input type="text" id="link" class="url" name="link">
+                    <label for="link">Link</label>
+                </div>
+
+                <div class="inputContainer half last right">
+                    <input type="file" id="id_image" class="eventDate" name="image" accept="image/*">
+                    <label for="id_image">Image</label>
+                </div>
+
+                <div class="inputContainer half last">
+                    <i class="fa fa-caret-down selectArrow"></i>
+                    <select id="country" class="eventCategory" name="country_select">
+                    <option class="disabled" value="">Choose a Country</option>
+                    {% for cid, label in c_choices %}
+                        <option class="" value="{{ cid }}" name="{{ cid }}">{{ label }}</option>
+                    {% endfor %}
+                    </select>
+                    <label for="category">Country</label>
+                </div>
+
+                <div class="inputContainer half last">
+                    <i class="fa fa-caret-down selectArrow"></i>
+                    <select id="price" class="eventCategory" name="price_select">
+                    <option class="disabled" value="">Choose a price Range</option>
+                    {% for pid, label in p_choices %}
+                        <option class="" value="{{ pid }}" name="{{ pid }}">{{ label }}</option>
+                    {% endfor %}
+                    </select>
+                    <label for="category">Price</label>
+                </div>
+
+                <div class="row" id="row">
+                    <button class="eventAdd" name="eventAdd" type="submit"><i class="fa fa-plus icon"></i>Create an Event</button>
+                    <button class="eventDelete" name="eventDelete" formnovalidate="" type="submit" onclick="$('input#sublist').click();"><i class="far fa-trash-alt"></i></i>Delete Event</button>
+                </div>
+
+            <ul class="eventList">
+            {% for event in events %} <!-- django template lang - for loop -->
+                <li class="eventItem">
+                    <input type="checkbox" class="eventCheckbox" name="checkedbox" id="{{ event.id }}" value="{{ event.id }}">
+                    <p>id: {{ event.id }}</p>
+                    <label for="{{ event.id }}"><span class="complete-">{{ event.title }}</span></label>
+                    <br>
+                    <span class="category-{{ event.category }}">{{ event.category }}</span>
+                    <span class="category-{{ event.price }}">{{ event.price }}</span>
+                    <span class="category-{{ event.country }}">{{ event.country }}</span>
+                    <strong class="eventDate"><i class="fa fa-calendar"></i>{{ event.event_date }}</strong>
+                    <img src="{{ event.image.url }}" style=height:200px; width="200px">
+                    <br>
+                    <a href="{{ event.link }}"> Link! </a>
+
+                </li>
+            {% endfor %}
+            </ul><!-- eventList -->
+            </form>
+            </div><!-- content -->
+ </div><!-- container -->
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+
+{% endblock %}

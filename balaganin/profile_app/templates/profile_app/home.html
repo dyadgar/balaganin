@@ -1,0 +1,98 @@
+{% extends 'profile_app/base.html' %}
+
+{% block title %} {% endblock %}
+{% load crispy_forms_tags %}
+{% load static %}
+<h1>Welcome to my site!</h1>
+
+
+{% block content %}
+{% if user.is_authenticated %}
+
+
+
+<style>
+
+.carousel{
+    background: #2f4357;
+    margin-top: 20px;
+}
+.carousel-item{
+    text-align: center;
+    min-height: 280px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+}
+h3{
+
+}
+.bs-example{
+	margin: 20px;
+}
+.img-fluid{
+height:250px;
+width:250px;
+}
+</style>
+<body>
+<br>
+<div class="jumbotron" style="background-image: url({% static 'images/background2.jpg' %}); background-position:center; background-size:cover;">
+    <div class="container text-center my-3">
+        <div class="label">
+            <h2 class="animated rubberBand infinite delay-3s" style="color:white;"><strong>Total Balaganners: </strong> {{ count }}</h2>
+        </div>
+        <br>
+        <iframe width="700" height="500" src="https://www.youtube.com/embed/9L0MOQ0so20?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <br>
+
+    <div class="container text-center my-3">
+        <h2 style="color:white;">Partners</h2><i class="fas fa-handshake fa-2x" style="color:white;"></i>
+        <br>
+        <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
+            <div class="carousel-inner w-100" role="listbox">
+                <div class="carousel-item row no-gutters active">
+                   <a href="https://www.conexionmexico.com.mx/"> <div class="col-3 float-left"><img class="img-fluid" src="/static/images/carousel/conexion.jpeg" ></div></a>
+                    <a href="https://www.instagram.com/rituelmexico/"> <div class="col-3 float-left"><img class="img-fluid" src="/static/images/carousel/rituel.png" ></div></a>
+                    <a href="https://www.facebook.com/fckingmondaymadrid"><div class="col-3 float-left"><img class="img-fluid" src="/static/images/carousel/fmonday.png"></div></a>
+                    <a href="https://polanquito.net/"></a> <div class="col-3 float-left"><img class="img-fluid" src="/static/images/carousel/polanquito.png"></div> </a>
+                </div>
+                <div class="carousel-item row no-gutters">
+                    <a href="http://www.block-club.com/"> <div class="col-3 float-left"><img class="img-fluid" src="/static/images/carousel/TheBlock.jpg"></div></a>
+                    <a href="https://tlv.dgtl.nl/en/?skip_portal=1"> <div class="col-3 float-left"><img class="img-fluid" src="/static/images/carousel/dgtl.png"></div></a>
+                    <a href="https://grupo.eco/"> <div class="col-3 float-left"><img class="img-fluid" src="/static/images/carousel/sicario.jpeg"></div> </a>
+                    <a href="https://concreteparis.fr/"> <div class="col-3 float-left"><img class="img-fluid" src="/static/images/carousel/concrete.jpg"></div> </a>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+
+    </div>
+    </div>
+
+</body>
+
+{% else %}
+<br>
+<div class="jumbotron" style="background-image: url({% static 'images/background2.jpg' %}); background-position:center; background-size:cover;">
+<div class="container">
+<h1>You are not logged in</h1>
+<br>
+<a class="btn btn-danger btn-lg" href="{% url 'login' %}">Login</a>
+<a class="btn btn-danger btn-lg" href="{% url 'register' %}">Sign Up</a>
+</div>
+</div>
+{% endif%}
+
+
+{% endblock %}
+
+
+
